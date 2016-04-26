@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xf="http://www.w3.org/2002/xforms">
+    <xf:repeat ref="tei:desc" id="new-desc">
+        <fieldset>
+            <legend> 
+                    Description
+                    <xf:trigger appearance="minimal" class="btn remove pull-right">
+                    <xf:label/>
+                    <xf:delete ev:event="DOMActivate" ref="."/>
+                </xf:trigger>
+            </legend>
+            <div class="panel">
+                    <!-- Type? abstract YES/or no? -->
+                <xi:include href="type-attr.xml"/>
+                <xi:include href="lang-attr.xml"/>
+                <xi:include href="source-attr.xml"/>
+                <xi:include href="quote-el.xml"/>
+                <xf:group ref="self::*[not(tei:quote/@source)]">
+                    <span class="input-group mixed-content">
+                        <span class="form-control">
+                            <xf:input ref="instance('i-add-name')/@ref" class="input-md">
+                                <xf:label>URI</xf:label>
+                            </xf:input>
+                        </span>
+                        <xf:trigger appearance="minimal" class="btn btn-default btn-search input-group-addon">
+                            <xf:label>Lookup URI</xf:label>
+                            <xf:action ev:event="DOMActivate">
+                                <xf:setvalue ref="instance('i-search')/element" value="'persName'"/>
+                                <xf:show dialog="new-name"/>
+                            </xf:action>
+                        </xf:trigger>
+                        <xf:trigger appearance="minimal" class="btn btn-default input-group-addon">
+                            <xf:label>&lt;persName&gt;</xf:label>
+                            <xf:wrap ev:event="DOMActivate" control="d" pre="&lt;persName ref=&#34;{instance('i-add-name')/@ref}&#34;&gt;" post="&lt;/persName&gt;"/>
+                        </xf:trigger>
+                        <xf:trigger appearance="minimal" class="btn btn-default input-group-addon">
+                            <xf:label>&lt;placeName&gt;</xf:label>
+                            <xf:wrap ev:event="DOMActivate" control="d" pre="&lt;placeName ref=&#34;{instance('i-add-name')/@ref}&#34;&gt;" post="&lt;/placeName&gt;"/>
+                        </xf:trigger>
+                    </span>
+                    <br/>
+                    <xf:textarea id="d" ref="." incremental="true"/>
+                </xf:group>
+            </div>
+        </fieldset>
+    </xf:repeat>
+</div>
