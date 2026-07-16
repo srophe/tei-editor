@@ -1,3 +1,4 @@
+2026-07-16: Archiving this repository as no longer needed.
 
 # tei-editor
 Sandbox for tei forms. Built in eXistdb, uses xsltforms and xsltforms specific javascript. 
